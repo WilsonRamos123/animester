@@ -130,11 +130,7 @@ class RegisterPage extends StatelessWidget {
                     child: RaisedButton(
                       color: Colors.grey.shade900,
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage()),
-                        );
+                        Navigator.pushNamed(context, '/');
                       },
                       child: const Text(
                         "Iniciar Sesion",

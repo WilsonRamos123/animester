@@ -86,7 +86,9 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 6.0),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, 'feed');
+                },
                 child: const Text('Iniciar Sesión'),
                 style: ElevatedButton.styleFrom(primary: Colors.orange),
               ),
@@ -104,11 +106,7 @@ class HomePage extends StatelessWidget {
                     child: RaisedButton(
                       color: Colors.grey.shade900,
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const RegisterPage()),
-                        );
+                        Navigator.pushNamed(context, 'register');
                       },
                       child: const Text(
                         "Registrate",
