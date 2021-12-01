@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/pages/register_page.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +20,10 @@ class HomePage extends StatelessWidget {
                 )),
             Text(
               "Iniciar Sesión",
-              style: TextStyle(color: Colors.grey[200], fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Colors.grey[200],
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
             ),
             Column(
               children: [
@@ -87,14 +93,38 @@ class HomePage extends StatelessWidget {
             ),
             Column(
               children: [
-                Text("¿No tienes cuenta?", style: TextStyle(fontSize: 17,
-                  color: Colors.grey[500],)),
-                Text(
-                  "Regístrate",
-                  style: TextStyle(fontSize: 17,
-                  color: Colors.orange,
-                  fontWeight: FontWeight.w700),
-                )
+                Text("¿No tienes cuenta?",
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.grey[500],
+                    )),
+                Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 6.0),
+                    // ignore: deprecated_member_use
+                    child: RaisedButton(
+                      color: Colors.grey.shade900,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegisterPage()),
+                        );
+                      },
+                      child: const Text(
+                        "Registrate",
+                        style: TextStyle(
+                            fontSize: 17,
+                            color: Colors.orange,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ))
+                // Text(
+                //   "Regístrate",
+                //   style: TextStyle(
+                //       fontSize: 17,
+                //       color: Colors.orange,
+                //       fontWeight: FontWeight.w700),
+                // )
               ],
             )
           ], mainAxisAlignment: MainAxisAlignment.spaceAround),
