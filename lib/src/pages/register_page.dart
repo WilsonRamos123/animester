@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/pages/register_page.dart';
+import 'package:flutter_application_1/src/pages/home_page.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +18,7 @@ class HomePage extends StatelessWidget {
                       fontWeight: FontWeight.w500),
                 )),
             Text(
-              "Iniciar Sesión",
+              "Registro",
               style: TextStyle(
                   color: Colors.grey[200],
                   fontSize: 20,
@@ -27,6 +26,33 @@ class HomePage extends StatelessWidget {
             ),
             Column(
               children: [
+                Padding(
+                  //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Column(
+                    children: [
+                      Padding(
+                        //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 6),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Nombre",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                        ),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Enter your name here',
+                          hintStyle: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Padding(
                   //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                   padding: EdgeInsets.symmetric(horizontal: 15),
@@ -87,13 +113,13 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 6.0),
               child: ElevatedButton(
                 onPressed: () {},
-                child: const Text('Iniciar Sesión'),
+                child: const Text('Registrarse'),
                 style: ElevatedButton.styleFrom(primary: Colors.orange),
               ),
             ),
             Column(
               children: [
-                Text("¿No tienes cuenta?",
+                Text("¿Ya tienes cuenta?",
                     style: TextStyle(
                       fontSize: 17,
                       color: Colors.grey[500],
@@ -107,24 +133,17 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const RegisterPage()),
+                              builder: (context) => const HomePage()),
                         );
                       },
                       child: const Text(
-                        "Registrate",
+                        "Iniciar Sesion",
                         style: TextStyle(
                             fontSize: 17,
                             color: Colors.orange,
                             fontWeight: FontWeight.w700),
                       ),
                     ))
-                // Text(
-                //   "Regístrate",
-                //   style: TextStyle(
-                //       fontSize: 17,
-                //       color: Colors.orange,
-                //       fontWeight: FontWeight.w700),
-                // )
               ],
             )
           ], mainAxisAlignment: MainAxisAlignment.spaceAround),
