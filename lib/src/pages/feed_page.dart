@@ -1,46 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/domain/controller/textcontroller.dart';
+import 'package:get/get.dart';
 
 class Feed extends StatefulWidget {
-  Feed({Key? key}) : super(key: key);
+  const Feed({Key? key}) : super(key: key);
 
   @override
   _Feed createState() => _Feed();
 }
 
 class _Feed extends State<Feed> {
+  TextController controller = Get.find();
   String _status = '';
-
+  final estado = TextEditingController();
+  String state = "";
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-            title: Text(
-              'ANIMASTER',
-              style: TextStyle(color: Colors.orange),
-            ),
-            centerTitle: true,
-            backgroundColor: Colors.black),
-        body: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-          children: [_createInput(), Divider(), _creatStatus()],
-        ),
-        backgroundColor: Colors.grey.shade900);
+    return ListView(
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+      children: [_createInput(), Divider(), _creatStatus()],
+    );
   }
 
   Widget _createInput() {
     return TextField(
+      controller: estado,
+      onTap: () => estado.text = '',
+      onSubmitted: (value) => controller.updateText(_status),
+      style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
         ),
         fillColor: Colors.white,
-        hintText: '¿Qué estás pensando?',
+        hintText: '¿Como te sientes?',
         hintStyle: TextStyle(color: Colors.grey),
         icon: Icon(
           Icons.account_circle,
           size: 50,
           color: Colors.grey,
         ),
+        // suffixIcon: Padding(
+        //   padding: const EdgeInsets.symmetric(vertical: 6.0),
+        //   child: Icon(
+        //     Icons.send_rounded,
+        //   ),
+        // ),
       ),
       onChanged: (String value) {
         setState(() {
@@ -51,10 +56,12 @@ class _Feed extends State<Feed> {
   }
 
   Widget _creatStatus() {
-    return ListTile(
-      title: Text(
-        "Tu estado es: $_status",
-        style: TextStyle(color: Colors.grey),
+    return Obx(
+      () => ListTile(
+        title: Text(
+          "Tu estado es: ${controller.text}",
+          style: TextStyle(color: Colors.grey),
+        ),
       ),
     );
   }

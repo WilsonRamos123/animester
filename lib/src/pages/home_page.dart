@@ -87,7 +87,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 6.0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, 'feed');
+                  Navigator.pushNamed(context, 'feed2');
                 },
                 child: const Text('Iniciar Sesión'),
                 style: ElevatedButton.styleFrom(primary: Colors.orange),
