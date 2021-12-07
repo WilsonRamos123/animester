@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/domain/controller/Authcontroller.dart';
 import 'package:flutter_application_1/domain/controller/textcontroller.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +12,7 @@ class Feed extends StatefulWidget {
 
 class _Feed extends State<Feed> {
   TextController controller = Get.find();
+  // AuthController authController = Get.find();
   String _status = '';
   final estado = TextEditingController();
   String state = "";

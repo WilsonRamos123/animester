@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/domain/controller/Authcontroller.dart';
 import 'package:flutter_application_1/domain/controller/textcontroller.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,7 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> {
   TextController controller = Get.find();
-
+  AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
     final perfil_state = TextEditingController();
@@ -60,7 +61,7 @@ class _Home extends State<Home> {
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                 title: Text(
-                  "Tu ultimo estado fue: \n\n${controller.text}",
+                  "${authController.email}\n\nTu ultimo estado fue: \n\n${controller.text}",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,

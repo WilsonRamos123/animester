@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/domain/controller/Authcontroller.dart';
 import 'package:flutter_application_1/src/pages/register_page.dart';
+import 'package:get/get.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  AuthController controller = Get.find();
+  String emailControler = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +59,12 @@ class HomePage extends StatelessWidget {
                           hintText: 'Enter your email address',
                           hintStyle: TextStyle(color: Colors.grey),
                         ),
+                        onChanged: (String value){
+                          setState(() {
+                            emailControler = value;
+                            print(emailControler);
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -88,6 +103,7 @@ class HomePage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, 'feed2');
+                  controller.updateUser(emailControler);
                 },
                 child: const Text('Iniciar Sesión'),
                 style: ElevatedButton.styleFrom(primary: Colors.orange),
@@ -106,6 +122,7 @@ class HomePage extends StatelessWidget {
                     child: RaisedButton(
                       color: Colors.grey.shade900,
                       onPressed: () {
+                        
                         Navigator.pushNamed(context, 'register');
                       },
                       child: const Text(
