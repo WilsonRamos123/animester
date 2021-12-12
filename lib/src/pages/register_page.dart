@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/domain/controller/Authcontroller.dart';
 import 'package:flutter_application_1/src/pages/home_page.dart';
+import 'package:get/get.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
+
+  @override
+  _RegisterPageState createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  AuthController authController = Get.find();
+  String _email = '';
+  String _password = '';
+  String _name = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
+            child: SingleChildScrollView(
           child: Column(children: <Widget>[
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 40),
@@ -44,11 +57,17 @@ class RegisterPage extends StatelessWidget {
                         ),
                       ),
                       TextField(
+                        style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Enter your name here',
                           hintStyle: TextStyle(color: Colors.grey),
                         ),
+                        onChanged: (String value) {
+                          setState(() {
+                            _name = value;
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -71,11 +90,17 @@ class RegisterPage extends StatelessWidget {
                         ),
                       ),
                       TextField(
+                        style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Enter your email address',
                           hintStyle: TextStyle(color: Colors.grey),
                         ),
+                        onChanged: (String value) {
+                          setState(() {
+                            _email = value;
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -99,11 +124,18 @@ class RegisterPage extends StatelessWidget {
                           ),
                         ),
                         TextField(
+                          style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'Enter your password here',
-                              hintStyle: TextStyle(color: Colors.grey),
-                              fillColor: Colors.grey),
+                            border: OutlineInputBorder(),
+                            hintText: 'Enter your password here',
+                            hintStyle: TextStyle(color: Colors.grey),
+                            fillColor: Colors.white,
+                          ),
+                          onChanged: (String value) {
+                            setState(() {
+                              _password = value;
+                            });
+                          },
                         ),
                       ],
                     )),
@@ -112,7 +144,11 @@ class RegisterPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 6.0),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  print(
+                      'name: $_name \n email: $_email \n password: $_password');
+                  authController.signUp(_email, _password);
+                },
                 child: const Text('Registrarse'),
                 style: ElevatedButton.styleFrom(primary: Colors.orange),
               ),
@@ -143,7 +179,7 @@ class RegisterPage extends StatelessWidget {
               ],
             )
           ], mainAxisAlignment: MainAxisAlignment.spaceAround),
-        ),
+        )),
         // backgroundColor: Colors.blueGrey.shade200
         backgroundColor: Colors.grey.shade900);
   }
