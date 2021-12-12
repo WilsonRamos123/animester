@@ -1,19 +1,32 @@
-import 'package:flutter_application_1/domain/text.dart';
+
 import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_application_1/domain/models/user.dart';
 
 class AuthController extends GetxController {
   var email = "".obs;
-
-
   void updateUser(String user) {
-    //1. Llama el metodo adjustValue y envía los parametros necesarios
     email.value = user;
-    //2. Llama el metodo dec2bin y envía los parametros necesarios
-    //_binary.value = Converter.bin2dec(text.value);
   }
-
   void reset() {
     email.value = "";
     //   text.value = "0";
   }
+
+  //*************************TRUE CODE*********************************
+//  final FirebaseAuth _auth = FirebaseAuth.instance;
+//  User _userFromFirebaseUser(FirebaseUser user){} 
+
+
+// sign in as Anon
+// Future signInAnon()async {
+//   try{
+
+//   }catch(e){
+
+//   }
+// }
+  // sign in 
+  
+
 }

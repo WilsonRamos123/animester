@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "901761885928",
+    "project_id": "animester-1014d",
+    "storage_bucket": "animester-1014d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901761885928:android:020eae301fad45fe758b5d",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "901761885928-m60tihdroqhl9jb2qaf2fe09j54u608o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5q58qTBfIVr5nwIxVBNqPauI0fYCtDps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "901761885928-m60tihdroqhl9jb2qaf2fe09j54u608o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
