@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/domain/controller/Authcontroller.dart';
@@ -22,14 +23,30 @@ class MyApp extends StatelessWidget {
             }
             if (snapshot.connectionState == ConnectionState.done) {
               Get.put(AuthController());
-              return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                initialRoute: '/',
-                routes: <String, WidgetBuilder>{
-                  '/': (BuildContext context) => HomePage(),
-                  'register': (BuildContext context) => RegisterPage(),
-                  'feed2': (BuildContext context) => Feed2(),
-                  'chat': (BuildContext context) => Chat(),
+              return StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (FirebaseAuth.instance.currentUser!=null) {
+                    return MaterialApp(
+                      debugShowCheckedModeBanner: false,
+                      initialRoute: 'feed2',
+                      routes: <String, WidgetBuilder>{
+                        'feed2': (BuildContext context) => Feed2(),
+                        'chat': (BuildContext context) => Chat(),
+                        '/': (BuildContext context) => HomePage(),
+                      },
+                    );
+                  } else {
+                    return MaterialApp(
+                      debugShowCheckedModeBanner: false,
+                      initialRoute: '/',
+                      routes: <String, WidgetBuilder>{
+                        'feed2': (BuildContext context) => Feed2(),
+                        '/': (BuildContext context) => HomePage(),
+                        'register': (BuildContext context) => RegisterPage()
+                      },
+                    );
+                  }
                 },
               );
             }

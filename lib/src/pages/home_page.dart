@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/domain/controller/Authcontroller.dart';
-import 'package:flutter_application_1/src/pages/register_page.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,8 +10,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  AuthController controller = Get.find();
-  String emailControler = '';
+  AuthController authController = Get.find();
+  String _email = '';
+  String _password = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,15 +54,17 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       TextField(
+                        keyboardType: TextInputType.emailAddress,
+                        style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Enter your email address',
                           hintStyle: TextStyle(color: Colors.grey),
                         ),
-                        onChanged: (String value){
+                        onChanged: (String value) {
                           setState(() {
-                            emailControler = value;
-                            print(emailControler);
+                            _email = value;
+                            print(_email);
                           });
                         },
                       ),
@@ -88,11 +90,18 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         TextField(
+                          style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               hintText: 'Enter your password here',
                               hintStyle: TextStyle(color: Colors.grey),
                               fillColor: Colors.grey),
+                          onChanged: (String value) {
+                            setState(() {
+                              _password = value;
+                              print(_password);
+                            });
+                          },
                         ),
                       ],
                     )),
@@ -101,9 +110,13 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 6.0),
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, 'feed2');
-                  controller.updateUser(emailControler);
+                onPressed: () async {
+                  await authController.login(_email, _password);
+                  if (authController.logInStatus()) {
+                    Navigator.pushNamed(context, 'feed2');
+                  } else {
+                    print('Rectifica tus credenciales');
+                  }
                 },
                 child: const Text('Iniciar Sesión'),
                 style: ElevatedButton.styleFrom(primary: Colors.orange),
@@ -122,7 +135,6 @@ class _HomePageState extends State<HomePage> {
                     child: RaisedButton(
                       color: Colors.grey.shade900,
                       onPressed: () {
-                        
                         Navigator.pushNamed(context, 'register');
                       },
                       child: const Text(

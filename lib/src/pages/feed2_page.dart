@@ -21,6 +21,7 @@ class _Feed2 extends State<Feed2> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
             title: Text(
               'ANIMESTER',
               style: TextStyle(color: Colors.orange),

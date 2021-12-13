@@ -61,7 +61,7 @@ class _Home extends State<Home> {
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                 title: Text(
-                  "${authController.email}\n\nTu ultimo estado fue: \n\n${controller.text}",
+                  "${authController.userEmail()}\n\nTu ultimo estado fue: \n\n${controller.text}",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,

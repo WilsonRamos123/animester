@@ -12,7 +12,7 @@ class Feed extends StatefulWidget {
 
 class _Feed extends State<Feed> {
   TextController controller = Get.find();
-  // AuthController authController = Get.find();
+  AuthController authController = Get.find();
   String _status = '';
   final estado = TextEditingController();
   String state = "";
