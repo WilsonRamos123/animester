@@ -90,6 +90,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         TextField(
+                          obscureText: true,
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),

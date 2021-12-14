@@ -32,6 +32,8 @@ dependencies:
   firebase_auth: ^3.3.3
   firebase_core: ^1.10.5
   firebase_database: ^9.0.3
+  loggy: ^2.0.1
+  prompt_dialog: ^1.0.0
   get: ^4.5.1
 
 dev_dependencies:
