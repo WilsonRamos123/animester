@@ -14,6 +14,7 @@ class Feed extends StatefulWidget {
 }
 
 class _Feed extends State<Feed> {
+<<<<<<< HEAD
   late Future<List<Gif>> _listadoGifs;
 
   Future<List<Gif>> _getGifs() async {
@@ -91,5 +92,13 @@ class _Feed extends State<Feed> {
     }
 
     return gifs;
+=======
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[800],
+      body: Text("Alfredo Area", style: TextStyle(color: Colors.white),),
+    );
+>>>>>>> 31db13b969bc1d5e8f26f56ab1816adfa4ed9e95
   }
 }

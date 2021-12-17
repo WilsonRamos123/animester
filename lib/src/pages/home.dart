@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/domain/controller/Authcontroller.dart';
+import 'package:flutter_application_1/domain/controller/Firestorecontroller.dart';
 import 'package:flutter_application_1/domain/controller/textcontroller.dart';
+import 'package:flutter_application_1/domain/models/user.dart';
 import 'package:get/get.dart';
+import 'package:prompt_dialog/prompt_dialog.dart';
 
 class Home extends StatefulWidget {
   const Home({
@@ -14,64 +18,89 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
-  TextController controller = Get.find();
-  AuthController authController = Get.find();
+  final FirebaseController firebaseController = Get.find();
+  final AuthController authController = Get.find();
+  @override
+  void initState() {
+    firebaseController.suscribeUpdates();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    firebaseController.unsuscribeUpdates();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final perfil_state = TextEditingController();
-    String _status = '';
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-      child: Column(
-        children: [_creatStatus(), Divider()],
+    return Scaffold(
+        body: Obx(
+          () => ListView.builder(
+              itemCount: firebaseController.entries.length,
+              padding: EdgeInsets.only(top: 20.0),
+              itemBuilder: (BuildContext context, int index) {
+                return _buildItem(context, firebaseController.entries[index]);
+              }),
+        ),
+        backgroundColor: Colors.grey.shade900,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.orange,
+          child: Icon(Icons.add),
+          onPressed: () {
+            addBaby(context);
+          },
+        ));
+  }
+
+  Widget _buildItem(BuildContext context, Record record) {
+    return Padding(
+      key: ValueKey(record.name),
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        child: Card(
+          color: Colors.grey[800],
+            child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.account_circle, size: 40,color: Colors.grey[400],),
+              title: Text(record.name, style: TextStyle(color: Colors.grey[300]),),
+              subtitle: Text(record.content,  style: TextStyle(color: Colors.grey[200])),
+            )
+          ],
+          
+        )),
       ),
-      // child: TextField(
-      //   controller: perfil_state,
-      //   style: TextStyle(color: Colors.white),
-      //   decoration: InputDecoration(
-      //     border: OutlineInputBorder(
-      //       borderRadius: BorderRadius.circular(8),
-      //     ),
-      //     fillColor: Colors.white,
-      //     hintText: '¿Que estas pensando?',
-      //     hintStyle: TextStyle(color: Colors.grey),
-      //     icon: Icon(
-      //       Icons.account_circle,
-      //       size: 50,
-      //       color: Colors.grey,
-      //     ),
-      //   ),
-      //   onChanged: (String value) {
-      //     setState(() {
-      //       _status = value;
-      //     });
-      //   },
-      // ),
     );
   }
 
-  Widget _creatStatus() {
-    return Obx(() => Card(
-        elevation: 10,
-        color: Colors.black,
-        child: Column(
-          children: [
-            Container(
-              child: ListTile(
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-                title: Text(
-                  "${authController.userEmail()}\n\nTu ultimo estado fue: \n\n${controller.text}",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.orange,
-                    //backgroundColor: Colors.grey[400],
-                  ),
-                ),
-              ),
-            )
-          ],
-        )));
+  Future<void> addBaby(BuildContext context) async {
+    getName(context).then((value) {
+      firebaseController.addEntry(authController.userEmail(),value);
+    });
+  }
+
+  Future<String> getName(BuildContext context) async {
+    String? result = await prompt(
+      context,
+      title: Text('Adding a post'),
+      initialValue: '',
+      textOK: Text('Ok'),
+      textCancel: Text('Cancel'),
+      hintText: 'comment',
+      minLines: 1,
+      autoFocus: true,
+      obscureText: false,
+      textCapitalization: TextCapitalization.words,
+    );
+    if (result != null) {
+      return Future.value(result);
+    }
+    return Future.error('cancel');
   }
 }
