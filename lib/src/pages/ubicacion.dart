@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+// import 'package:geolocator/geolocator.dart'; 
 
 class Ubicacion extends StatefulWidget {
   const Ubicacion({
@@ -12,6 +14,21 @@ class Ubicacion extends StatefulWidget {
 class _Ubicacion extends State<Ubicacion> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(title: Text('Geolocalizacion')),
+      body: Center(
+        child: Column(
+          children: [
+            Text('Direccion'),
+            Text('Latitud'),
+            Text('longitud'),
+            TextButton(onPressed:(){}, child: Text('Localizame'),
+            )
+          ],
+        ),
+      )
+    );
+    
+
   }
 }

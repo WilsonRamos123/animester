@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 40),
                 child: Text(
-                  'ANIMESTER',
+                  'ANIMESTER4',
                   style: TextStyle(
                       color: Colors.orange,
                       fontSize: 50,
