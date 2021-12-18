@@ -5,7 +5,7 @@ import 'package:flutter_application_1/domain/controller/textcontroller.dart';
 import 'package:flutter_application_1/src/models/Gif.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
- 
+
 class Feed extends StatefulWidget {
   const Feed({Key? key}) : super(key: key);
 
@@ -35,24 +35,21 @@ class _Feed extends State<Feed> {
     } else {
       throw Exception("Falló la conexión");
     }
-       
   }
+
   @override
   void initState() {
     super.initState();
     _listadoGifs = _getGifs();
   }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // backgroundColor: Colors.grey[800],
-      // body: Text("Alfredo Area", style: TextStyle(color: Colors.white),),
-      title: 'Consumo API',
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: Text('Consumo API',style:TextStyle(color: Colors.orange)),
+          automaticallyImplyLeading: false,
+          title: Text('Consumo API', style: TextStyle(color: Colors.orange)),
           backgroundColor: Colors.grey[800],
-
         ),
         body: FutureBuilder(
           future: _listadoGifs,
@@ -72,25 +69,25 @@ class _Feed extends State<Feed> {
             );
           },
         ),
-         
-        
-      ),
-      
-    );
-    
+        backgroundColor: Colors.grey.shade900);
   }
+
   List<Widget> _listGifs(data) {
     List<Widget> gifs = [];
 
     for (var gif in data) {
-      gifs.add(Card(child: Column(
+      gifs.add(Card(
+          child: Column(
         children: [
-          Expanded(child: Image.network(gif.url, fit: BoxFit.fill,)),
+          Expanded(
+              child: Image.network(
+            gif.url,
+            fit: BoxFit.fill,
+          )),
         ],
       )));
     }
 
     return gifs;
-
   }
 }
