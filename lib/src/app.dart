@@ -6,6 +6,7 @@ import 'package:flutter_application_1/src/pages/chat.dart';
 import 'package:flutter_application_1/src/pages/feed_page.dart';
 import 'package:flutter_application_1/src/pages/home_page.dart';
 import 'package:flutter_application_1/src/pages/register_page.dart';
+import 'package:flutter_application_1/src/pages/ubicacion.dart';
 import 'pages/feed2_page.dart';
 import 'package:get/get.dart';
 
@@ -29,11 +30,12 @@ class MyApp extends StatelessWidget {
                   if (FirebaseAuth.instance.currentUser!=null) {
                     return MaterialApp(
                       debugShowCheckedModeBanner: false,
-                      initialRoute: 'feed2',
+                      initialRoute: '/',
                       routes: <String, WidgetBuilder>{
                         'feed2': (BuildContext context) => Feed2(),
                         'chat': (BuildContext context) => Chat(),
                         '/': (BuildContext context) => HomePage(),
+                        'ubicacion':(BuildContext context) => Ubicacion(),
                       },
                     );
                   } else {
@@ -43,7 +45,8 @@ class MyApp extends StatelessWidget {
                       routes: <String, WidgetBuilder>{
                         'feed2': (BuildContext context) => Feed2(),
                         '/': (BuildContext context) => HomePage(),
-                        'register': (BuildContext context) => RegisterPage()
+                        'register': (BuildContext context) => RegisterPage(),
+                        'ubicacion':(BuildContext context) => Ubicacion(),
                       },
                     );
                   }
