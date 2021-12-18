@@ -4,7 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_application_1/domain/models/message.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
-
+ 
 class ChatController extends GetxController {
   final databaseReference = FirebaseDatabase.instance.reference();
   var messages = <Message>[].obs;
