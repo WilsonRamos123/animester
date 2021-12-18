@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
                         'chat': (BuildContext context) => Chat(),
                         '/': (BuildContext context) => HomePage(),
                         'ubicacion':(BuildContext context) => Ubicacion(),
+                        'register': (BuildContext context) => RegisterPage(),
                       },
                     );
                   } else {

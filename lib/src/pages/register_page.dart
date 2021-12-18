@@ -124,6 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                         TextField(
+                          obscureText: true,
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
@@ -148,6 +149,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   print(
                       'name: $_name \n email: $_email \n password: $_password');
                   authController.signUp(_email, _password);
+                  Navigator.pushNamed(context, '/');
                 },
                 child: const Text('Registrarse'),
                 style: ElevatedButton.styleFrom(primary: Colors.orange),
