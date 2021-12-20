@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_application_1/domain/models/user.dart';
+
+import 'preferencecontroller.dart';
 
 class AuthController extends GetxController {
   var email = "".obs;
@@ -46,16 +47,18 @@ class AuthController extends GetxController {
     }
   }
 
+  PreferenceController preferencesController = Get.find();
   Future<void> logOut() async {
     try {
       await FirebaseAuth.instance.signOut();
     } catch (e) {
       return Future.error(e.toString());
     }
+    preferencesController.save_data2(false);
   }
 
-  bool logInStatus(){
-    return FirebaseAuth.instance.currentUser!=null;
+  bool logInStatus() {
+    return FirebaseAuth.instance.currentUser != null;
   }
 
   String userEmail() {

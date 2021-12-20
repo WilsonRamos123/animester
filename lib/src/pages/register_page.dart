@@ -149,6 +149,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   print(
                       'name: $_name \n email: $_email \n password: $_password');
                   authController.signUp(_email, _password);
+                  _email = '';
+                  _password = '';
+                  _name = '';
                   Navigator.pushNamed(context, '/');
                 },
                 child: const Text('Registrarse'),

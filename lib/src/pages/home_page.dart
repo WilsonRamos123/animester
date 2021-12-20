@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/domain/controller/Authcontroller.dart';
+import 'package:flutter_application_1/domain/controller/preferencecontroller.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   AuthController authController = Get.find();
+  PreferenceController preferencesController = Get.find();
   String _email = '';
   String _password = '';
   @override
@@ -113,7 +116,9 @@ class _HomePageState extends State<HomePage> {
               child: ElevatedButton(
                 onPressed: () async {
                   await authController.login(_email, _password);
+
                   if (authController.logInStatus()) {
+                    preferencesController.save_data(_email, _password);
                     Navigator.pushNamed(context, 'feed2');
                   } else {
                     print('Rectifica tus credenciales');
@@ -146,18 +151,37 @@ class _HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.w700),
                       ),
                     ))
-                // Text(
-                //   "Regístrate",
-                //   style: TextStyle(
-                //       fontSize: 17,
-                //       color: Colors.orange,
-                //       fontWeight: FontWeight.w700),
-                // )
               ],
             )
           ], mainAxisAlignment: MainAxisAlignment.spaceAround),
         ),
         // backgroundColor: Colors.blueGrey.shade200
         backgroundColor: Colors.grey.shade900);
+  }
+
+  String? email;
+  String? password;
+  bool? pref;
+
+  Future<void> view_data() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    email = await prefs.getString('email');
+    password = await prefs.getString('password');
+    pref = await prefs.getBool('pref');
+    preferencesController.newPreference(pref!);
+    if (pref == true) {
+      if (email != null) {
+        if (email != "") {
+          print('aqui view');
+          Navigator.pushNamed(context, 'feed2');
+        }
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    view_data();
   }
 }

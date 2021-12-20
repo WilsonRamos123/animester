@@ -22,34 +22,51 @@ class _Perfil extends State<Perfil> {
     return Container(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6.0),
-            child: ElevatedButton(
-              onPressed: () async {
-                await authController.logOut();
-                if (authController.logInStatus() == false) {
-                  Navigator.pushNamed(context, '/');
-                }
-              },
-              child: const Text('Log out'),
-              style: ElevatedButton.styleFrom(primary: Colors.orange),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      await authController.logOut();
+                      if (authController.logInStatus() == false) {
+                        Navigator.pushNamed(context, '/');
+                      }
+                    },
+                    child: const Text('Log out'),
+                    style: ElevatedButton.styleFrom(primary: Colors.orange),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      database
+                          .child("/fluttermessages")
+                          .push()
+                          .set({'text': 'You got it'})
+                          .then((value) => print('added successfully'))
+                          .catchError(
+                              (error) => print('there are arrors: $error'));
+                    },
+                    child: const Text('forTesting'),
+                    style: ElevatedButton.styleFrom(primary: Colors.orange),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                  child: IconButton(
+                      color: Colors.orange,
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'settings');
+                      },
+                      icon: Icon(Icons.settings)),
+                )
+              ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6.0),
-            child: ElevatedButton(
-              onPressed: () async {
-                database
-                    .child("/fluttermessages")
-                    .push()
-                    .set({'text': 'You got it'})
-                    .then((value) => print('added successfully'))
-                    .catchError((error) => print('there are arrors: $error'));
-              },
-              child: const Text('forTesting'),
-              style: ElevatedButton.styleFrom(primary: Colors.orange),
-            ),
-          ),
+          )
         ],
       ),
     );

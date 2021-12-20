@@ -42,11 +42,12 @@ dependencies:
   permission_handler: ^8.3.0
   geocoding:
   fluttertoast:
+  shared_preferences: ^2.0.11
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  get: ^4.3.8
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

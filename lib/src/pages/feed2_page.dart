@@ -14,14 +14,14 @@ class Feed2 extends StatefulWidget {
 }
 
 class _Feed2 extends State<Feed2> {
-  String _status = '';
+  //String _status = '';
   int _numPage = 2;
   List<Widget> _paginas = [Perfil(), Feed(), Home(), Ubicacion(), Chat()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+            automaticallyImplyLeading: false,
             title: Text(
               'ANIMESTER',
               style: TextStyle(color: Colors.orange),

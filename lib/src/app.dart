@@ -10,6 +10,8 @@ import 'package:flutter_application_1/src/pages/ubicacion.dart';
 import 'pages/feed2_page.dart';
 import 'package:get/get.dart';
 
+import 'pages/settings.dart';
+
 class MyApp extends StatelessWidget {
   final Future<FirebaseApp> _inizialization = Firebase.initializeApp();
   @override
@@ -27,15 +29,16 @@ class MyApp extends StatelessWidget {
               return StreamBuilder(
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (FirebaseAuth.instance.currentUser!=null) {
+                  if (FirebaseAuth.instance.currentUser != null) {
                     return MaterialApp(
                       debugShowCheckedModeBanner: false,
                       initialRoute: '/',
                       routes: <String, WidgetBuilder>{
+                        'settings': (BuildContext context) => Settings(),
                         'feed2': (BuildContext context) => Feed2(),
                         'chat': (BuildContext context) => Chat(),
                         '/': (BuildContext context) => HomePage(),
-                        'ubicacion':(BuildContext context) => Ubicacion(),
+                        'ubicacion': (BuildContext context) => Ubicacion(),
                         'register': (BuildContext context) => RegisterPage(),
                       },
                     );
@@ -44,10 +47,11 @@ class MyApp extends StatelessWidget {
                       debugShowCheckedModeBanner: false,
                       initialRoute: '/',
                       routes: <String, WidgetBuilder>{
+                        'settings': (BuildContext context) => Settings(),
                         'feed2': (BuildContext context) => Feed2(),
                         '/': (BuildContext context) => HomePage(),
                         'register': (BuildContext context) => RegisterPage(),
-                        'ubicacion':(BuildContext context) => Ubicacion(),
+                        'ubicacion': (BuildContext context) => Ubicacion(),
                       },
                     );
                   }
