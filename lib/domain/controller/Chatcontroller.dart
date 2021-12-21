@@ -42,7 +42,8 @@ class ChatController extends GetxController {
   }
 
   Future<void> sendMsg(String text) async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    String uid = FirebaseAuth.instance.currentUser!.email ?? "a@a.com";
+    uid = uid.split('@')[0];
     try {
       databaseReference
           .child("fluttermessages")

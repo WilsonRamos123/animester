@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/domain/controller/Authcontroller.dart';
 import 'package:flutter_application_1/domain/controller/Firestorecontroller.dart';
-import 'package:flutter_application_1/domain/controller/textcontroller.dart';
 import 'package:flutter_application_1/domain/models/user.dart';
 import 'package:get/get.dart';
 import 'package:prompt_dialog/prompt_dialog.dart';
@@ -68,6 +65,7 @@ class _Home extends State<Home> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
+              onLongPress: () => firebaseController.deleteEntry(record),
               leading: Icon(Icons.account_circle, size: 40,color: Colors.grey[400],),
               title: Text(record.name, style: TextStyle(color: Colors.grey[300]),),
               subtitle: Text(record.content,  style: TextStyle(color: Colors.grey[200])),
@@ -81,7 +79,7 @@ class _Home extends State<Home> {
 
   Future<void> addBaby(BuildContext context) async {
     getName(context).then((value) {
-      firebaseController.addEntry(authController.userEmail(),value);
+      firebaseController.addEntry(authController.getName(),value);
     });
   }
 

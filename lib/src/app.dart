@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/domain/controller/Authcontroller.dart';
 import 'package:flutter_application_1/src/pages/chat.dart';
-import 'package:flutter_application_1/src/pages/feed_page.dart';
 import 'package:flutter_application_1/src/pages/home_page.dart';
 import 'package:flutter_application_1/src/pages/register_page.dart';
 import 'package:flutter_application_1/src/pages/ubicacion.dart';
@@ -18,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         home: Container(
       child: FutureBuilder(
           future: _inizialization,
@@ -39,8 +39,9 @@ class MyApp extends StatelessWidget {
                         'feed2': (BuildContext context) => Feed2(),
                         'chat': (BuildContext context) => Chat(),
                         '/': (BuildContext context) => HomePage(),
-                        'ubicacion': (BuildContext context) => vistagps(),
+                        'ubicacion': (BuildContext context) => Ubicacion(),
                         'register': (BuildContext context) => RegisterPage(),
+                        'vistagps': (BuildContext context) => vistagps(),
                       },
                     );
                   } else {
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
                         'feed2': (BuildContext context) => Feed2(),
                         '/': (BuildContext context) => HomePage(),
                         'register': (BuildContext context) => RegisterPage(),
-                        'ubicacion': (BuildContext context) => vistagps(),
+                        'ubicacion': (BuildContext context) => Ubicacion(),
                       },
                     );
                   }
@@ -60,7 +61,7 @@ class MyApp extends StatelessWidget {
               );
             }
             return Center(
-              child: Text('Loading...'),
+              child: CircularProgressIndicator(),
             );
           }),
     ));

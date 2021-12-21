@@ -45,17 +45,22 @@ class _ChatState extends State<Chat> {
       child: ListTile(
         onTap: () => chatController.updateMsg(element),
         onLongPress: () => chatController.deleteMsg(element, posicion),
-        title: Text(
+        title: Text(uid == element.user ? 'tú' : element.user,
+            style: TextStyle(color: Colors.grey[200], fontSize: 13),
+            textAlign: uid == element.user ? TextAlign.right : TextAlign.left,
+            
+            ),
+        subtitle: Text(
           element.text,
           textAlign: uid == element.user ? TextAlign.right : TextAlign.left,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontSize: 16),
         ),
       ),
     );
   }
 
   Widget _list() {
-    String uid = authenticationController.getUid();
+    String uid = authenticationController.getName();
     print('Current user $uid');
     return GetX<ChatController>(builder: (controller) {
       WidgetsBinding.instance!.addPostFrameCallback((_) => _scrollToEnd());
@@ -100,7 +105,7 @@ class _ChatState extends State<Chat> {
               style: TextStyle(color: Colors.white),
             ),
           ),
-        ),  
+        ),
         Padding(
             padding: const EdgeInsets.symmetric(vertical: 6.0),
             child: ElevatedButton(

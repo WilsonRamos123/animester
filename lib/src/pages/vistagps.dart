@@ -57,48 +57,51 @@ class _RoutePageState extends State<vistagps> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(
-        title: const Text('VistaGPS Animester',style:TextStyle(color: Colors.orange)),
-        backgroundColor: Colors.grey[800],
-      ),
-      body: Obx(
-        () => Stack(children: <Widget>[
-          GoogleMap(
-            mapType: _defaultMapType,
-            myLocationEnabled: true,
-            markers: _markers,
-            onMapCreated: _onMapCreated,
-            initialCameraPosition:
-                CameraPosition(target: googleMapController.posIni, zoom: 10.0),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 80, right: 10),
-            alignment: Alignment.topRight,
-            child: Column(children: <Widget>[
-              FloatingActionButton(
-                  child: const Icon(Icons.layers),
-                  elevation: 5,
-                  backgroundColor: Colors.teal[200],
-                  onPressed: () {
-                    _changeMapType();
-                    print('Changing the Map Type');
-                  }),
-              FloatingActionButton(
-                  child: const Icon(Icons.gps_not_fixed_outlined),
-                  elevation: 5,
-                  backgroundColor: Colors.teal[100],
-                  onPressed: () => updateMap()),
-            ]),
-          ),
-        ]),
-      ),
+        home: FutureBuilder(
+      future: googleMapController.getCurrentMapLocation(),
+      builder: (context, snatpshot) {
+        if (googleMapController.getCurrentMapLocation()!=null) {
+          return Container(
+            // appBar: AppBar(
+            //   title: const Text('VistaGPS Animester',
+            //       style: TextStyle(color: Colors.orange)),
+            //   backgroundColor: Colors.grey[800],
+            // ),
+            child: Obx(
+              () => Stack(children: <Widget>[
+                GoogleMap(
+                  mapType: _defaultMapType,
+                  myLocationEnabled: true,
+                  markers: _markers,
+                  onMapCreated: _onMapCreated,
+                  initialCameraPosition: CameraPosition(
+                      target: googleMapController.posIni, zoom: 10.0),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 80, right: 10),
+                  alignment: Alignment.topRight,
+                  child: Column(children: <Widget>[
+                    FloatingActionButton(
+                        child: const Icon(Icons.layers),
+                        elevation: 5,
+                        backgroundColor: Colors.teal[200],
+                        onPressed: () {
+                          _changeMapType();
+                          print('Changing the Map Type');
+                        }),
+                    FloatingActionButton(
+                        child: const Icon(Icons.gps_not_fixed_outlined),
+                        elevation: 5,
+                        backgroundColor: Colors.teal[100],
+                        onPressed: () => updateMap()),
+                  ]),
+                ),
+              ]),
+            ),
+          );
+        }
+        return Text('Loading...');
+      },
     ));
-
-    
   }
-
-  
-  
-  }
-   
+}

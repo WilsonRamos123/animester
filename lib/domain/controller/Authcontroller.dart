@@ -70,4 +70,8 @@ class AuthController extends GetxController {
     String uid = FirebaseAuth.instance.currentUser!.uid;
     return uid;
   }
+  String getName() {
+    String uid = FirebaseAuth.instance.currentUser!.email ?? "a@a.com";
+    return uid.split('@')[0];
+  }
 }

@@ -43,7 +43,7 @@ class _Ubicacion extends State<Ubicacion> {
 
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    
+
     try {
       List<Placemark> placemarks =
           await placemarkFromCoordinates(position.latitude, position.longitude);
@@ -58,39 +58,47 @@ class _Ubicacion extends State<Ubicacion> {
     } catch (e) {
       print(e);
     }
-    return(position);
+    return (position);
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-       backgroundColor: Colors.grey[800],
-      appBar: AppBar(
-          title: Text('Geolocalizacion',style:TextStyle(color: Colors.orange)),
-          backgroundColor: Colors.black, 
-        ),
-      body: Center(
-      
-        child: Column(
-          
-          children: [
-            
-            Text(currentAddress,style:TextStyle(color: Colors.orange)),
-            
+    return Container(
+        child: Center(
+      child: Column(
+        children: [
+          Text(currentAddress, style: TextStyle(color: Colors.orange)),
           currentposition != null
-              ? Text('Latitude = ' + currentposition.latitude.toString(),style:TextStyle(color: Colors.orange))
+              ? Text('Latitude = ' + currentposition.latitude.toString(),
+                  style: TextStyle(color: Colors.orange))
               : Container(),
           currentposition != null
-              ? Text('Longitude = ' + currentposition.longitude.toString(),style:TextStyle(color: Colors.orange))
+              ? Text('Longitude = ' + currentposition.longitude.toString(),
+                  style: TextStyle(color: Colors.orange))
               : Container(),
-            TextButton(onPressed:(){
-              _findme();
-            }, child: Text('Localizame',style:TextStyle(color: Colors.orange)),
-            )
-          ],
-        ),
-      )
-    );
-    
-
+          currentposition != null
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'vistagps');
+                    },
+                    child: const Text('ver en mapa'),
+                    style: ElevatedButton.styleFrom(primary: Colors.orange),
+                  ),
+                )
+              : Container(),
+          currentposition == null
+              ? TextButton(
+                  onPressed: () {
+                    _findme();
+                  },
+                  child: Text('Localizame',
+                      style: TextStyle(color: Colors.orange)),
+                )
+              : Container()
+        ],
+      ),
+    ));
   }
 }

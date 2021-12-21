@@ -41,22 +41,6 @@ class _Perfil extends State<Perfil> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 6.0),
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      database
-                          .child("/fluttermessages")
-                          .push()
-                          .set({'text': 'You got it'})
-                          .then((value) => print('added successfully'))
-                          .catchError(
-                              (error) => print('there are arrors: $error'));
-                    },
-                    child: const Text('forTesting'),
-                    style: ElevatedButton.styleFrom(primary: Colors.orange),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 6.0),
                   child: IconButton(
                       color: Colors.orange,
                       onPressed: () {
