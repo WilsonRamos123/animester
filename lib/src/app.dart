@@ -7,6 +7,7 @@ import 'package:flutter_application_1/src/pages/feed_page.dart';
 import 'package:flutter_application_1/src/pages/home_page.dart';
 import 'package:flutter_application_1/src/pages/register_page.dart';
 import 'package:flutter_application_1/src/pages/ubicacion.dart';
+import 'package:flutter_application_1/src/pages/vistagps.dart';
 import 'pages/feed2_page.dart';
 import 'package:get/get.dart';
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
                         'feed2': (BuildContext context) => Feed2(),
                         'chat': (BuildContext context) => Chat(),
                         '/': (BuildContext context) => HomePage(),
-                        'ubicacion': (BuildContext context) => Ubicacion(),
+                        'ubicacion': (BuildContext context) => vistagps(),
                         'register': (BuildContext context) => RegisterPage(),
                       },
                     );
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
                         'feed2': (BuildContext context) => Feed2(),
                         '/': (BuildContext context) => HomePage(),
                         'register': (BuildContext context) => RegisterPage(),
-                        'ubicacion': (BuildContext context) => Ubicacion(),
+                        'ubicacion': (BuildContext context) => vistagps(),
                       },
                     );
                   }

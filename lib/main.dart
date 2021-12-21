@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/domain/controller/Chatcontroller.dart';
 import 'package:flutter_application_1/domain/controller/Firestorecontroller.dart';
+import 'package:flutter_application_1/domain/controller/googlemaps_controller.dart';
+import 'package:flutter_application_1/services/geolocator_service.dart';
 import 'package:flutter_application_1/src/app.dart';
 import 'package:get/get.dart';
 import 'domain/controller/preferencecontroller.dart';
@@ -15,6 +17,8 @@ void main() {
   Get.lazyPut<FirebaseController>(() => FirebaseController());
   Get.lazyPut<ChatController>(() => ChatController());
   Get.lazyPut<PreferenceController>(() => PreferenceController());
+  Get.lazyPut<MapController>(() => MapController());
+   Get.lazyPut<GeolocatorService>(() => GeolocatorService());
 
   runApp(new MyApp());
 }
